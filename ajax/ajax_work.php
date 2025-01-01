@@ -8,50 +8,16 @@ if (isset($_GET['action'])) {
 }
 
 switch ($action) {
-    case "createPost";
-        $post_user_name     = $_POST['post_user_name'];
+    case "create_post";
+        $auth_user_name     = $_POST['auth_user_name'];
         $post_content       = $_POST['post_content'];
 
-        //Auth User Photo uploed
-        $post_user_photo = move([
-            "tmp_name"  => $_FILES['post_user_photo']['tmp_name'],
-            "name"      => $_FILES['post_user_photo']['name'],
-        ], "media/user_photo/");
-
-
-        //Post Photo uploed
-
-        $post_photo = [];
-
-        if (!empty($_FILES['post_photo']['name'][0])) {
-
-            for ($i = 0; $i < count($_FILES['post_photo']['name']); $i++) {
-                $post_photo_item = move([
-                    "tmp_name"  => $_FILES['post_photo']['tmp_name'][$i],
-                    "name"      => $_FILES['post_photo']['name'][$i],
-                ], "media/posts/");
-
-                array_push($post_photo, $post_photo_item);
-            }
-        }
-
-        //video uploed
-        $post_videos = null;
-        if ($_FILES['post_video']['name']) {
-
-            $post_videos = move([
-                "tmp_name"  => $_FILES['post_videos']['tmp_name'],
-                "name"      => $_FILES['post_videos']['name'],
-            ], "media/videos/");
-        }
-
-
         store('post', [
-            'post_user_name'    => $post_user_name,
-            'post_user_photo'   => $post_user_photo,
+            'auth_user_name'    => $auth_user_name,
             'post_content'      => $post_content,
-            'post_videos'       => $post_videos,
-            'post_photo'        => $post_photo
+            // 'auth_user_photo'   => $auth_user_photo,
+            // 'post_video'        => $post_video,
+            // 'post_photos'       => $post_photos
         ]);
 
         break;

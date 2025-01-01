@@ -6,26 +6,26 @@ if (file_exists(__DIR__ . '/autoload.php')) {
 
 
 
-if (isset($_GET['likeId'])) {
+// if (isset($_GET['likeId'])) {
 
-  $likeId = $_GET['likeId'];
+//   $likeId = $_GET['likeId'];
 
-  $likeData = json_decode(file_get_contents('./db/posts.json'), true);
+//   $likeData = json_decode(file_get_contents('./db/posts.json'), true);
 
-  $likeUpdate = [];
+//   $likeUpdate = [];
 
-  foreach ($likeData as $likeItem) {
+//   foreach ($likeData as $likeItem) {
 
-    if ($likeItem["id"] == $likeId) {
-      $likeItem['likes'] = $likeItem['likes'] + 1;
-    }
-    array_push($likeUpdate, $likeItem);
-  }
+//     if ($likeItem["id"] == $likeId) {
+//       $likeItem['likes'] = $likeItem['likes'] + 1;
+//     }
+//     array_push($likeUpdate, $likeItem);
+//   }
 
 
-  file_put_contents('./db/posts.json', json_encode($likeUpdate));
-  header('location:index.php');
-}
+//   file_put_contents('./db/posts.json', json_encode($likeUpdate));
+//   header('location:index.php');
+// }
 
 
 
@@ -805,6 +805,14 @@ if (isset($_GET['likeId'])) {
 
 
 
+
+
+
+
+
+
+
+
   <!-- Create Post Modal start -->
   <div class="modal fade" id="create_post_modal">
     <div class="modal-dialog modal-dialog-centered">
@@ -812,14 +820,14 @@ if (isset($_GET['likeId'])) {
         <div class="modal-body">
           <h2>Create Post</h2>
           <hr>
-          <form id="post_submit" enctype="multipart/form-data">
+          <form id="post_submit" method="POST" enctype="multipart/form-data">
             <div class="my-2">
               <label for="">Auth User Name</label>
-              <input type="text" class="form-control" name="post_user_name" placeholder="Name">
+              <input type="text" class="form-control" name="auth_user_name" placeholder="Name">
             </div>
             <div class="my-2">
               <label for="">Auth User Photo</label>
-              <input type="file" class="form-control" name="post_user_photo">
+              <input type="file" class="form-control" name="auth_user_photo">
             </div>
 
             <div class="my-2">
@@ -829,12 +837,12 @@ if (isset($_GET['likeId'])) {
 
             <div class="my-2">
               <label for="">Post Photo</label>
-              <input type="file" class="form-control" multiple name="post_photo[]" placeholder="post photo">
+              <input type="file" class="form-control" multiple name="post_photos[]" placeholder="post photo">
             </div>
 
             <div class="my-2">
               <label for="">Video Content</label>
-              <input type="file" class="form-control" name="post_videos">
+              <input type="file" class="form-control" name="post_video">
             </div>
 
             <div class="my-2">
@@ -845,13 +853,14 @@ if (isset($_GET['likeId'])) {
       </div>
     </div>
   </div>
-
-
   <!-- Create Post Modal end -->
 
 
+
+
+
   <!-- Create Comment Modal start -->
-  <div class="modal fade" id="create_comment_modal">
+  <!-- <div class="modal fade" id="create_comment_modal">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
         <div class="modal-body">
@@ -881,15 +890,14 @@ if (isset($_GET['likeId'])) {
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
   <!-- Create Comment Modal end -->
 
 
   <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="//cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="./ajax/ajax.js"></script>
-  <script src="./assets/js/main.js"></script>
+  <script src="./js/ajax.js"></script>
 </body>
 
 </html>
