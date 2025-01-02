@@ -18,7 +18,7 @@ switch ($action) {
         $auth_user_photo = move([
             "tmp_name" => $_FILES['auth_user_photo']['tmp_name'],
             "name"      => $_FILES['auth_user_photo']['name'],
-        ], "media/auth_user_photo/");
+        ], "../media/auth_user_photo/");
         //Post Photo uploed
         // $post_photos = [];
         // if (!empty($_FILES['post_photos']['name'][0])) {
