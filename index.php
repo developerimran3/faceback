@@ -1,30 +1,32 @@
 <?php
 
-if (file_exists(__DIR__ . '/autoload.php')) {
-  require_once __DIR__ . '/autoload.php';
+
+if (file_exists(__DIR__ . "/autoload.php")) {
+  require_once __DIR__ . "/autoload.php";
 }
+
 
 
 
 // if (isset($_GET['likeId'])) {
 
-//   $likeId = $_GET['likeId'];
+// $likeId = $_GET['likeId'];
 
-//   $likeData = json_decode(file_get_contents('./db/posts.json'), true);
+// $likeData = json_decode(file_get_contents('./db/posts.json'), true);
 
-//   $likeUpdate = [];
+// $likeUpdate = [];
 
-//   foreach ($likeData as $likeItem) {
+// foreach ($likeData as $likeItem) {
 
-//     if ($likeItem["id"] == $likeId) {
-//       $likeItem['likes'] = $likeItem['likes'] + 1;
-//     }
-//     array_push($likeUpdate, $likeItem);
-//   }
+// if ($likeItem["id"] == $likeId) {
+// $likeItem['likes'] = $likeItem['likes'] + 1;
+// }
+// array_push($likeUpdate, $likeItem);
+// }
 
 
-//   file_put_contents('./db/posts.json', json_encode($likeUpdate));
-//   header('location:index.php');
+// file_put_contents('./db/posts.json', json_encode($likeUpdate));
+// header('location:index.php');
 // }
 
 
@@ -820,7 +822,7 @@ if (file_exists(__DIR__ . '/autoload.php')) {
         <div class="modal-body">
           <h2>Create Post</h2>
           <hr>
-          <form id="post_submit" method="POST" enctype="multipart/form-data">
+          <form id="post_create" method="POST" enctype="multipart/form-data">
             <div class="my-2">
               <label for="">Auth User Name</label>
               <input type="text" class="form-control" name="auth_user_name" placeholder="Name">
@@ -894,10 +896,12 @@ if (file_exists(__DIR__ . '/autoload.php')) {
   <!-- Create Comment Modal end -->
 
 
-  <script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js">
+  </script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="//cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="./js/ajax.js"></script>
 </body>
+
 
 </html>
