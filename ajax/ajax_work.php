@@ -10,93 +10,48 @@ if (isset($_GET['action'])) {
 
 switch ($action) {
     case "create_data";
-
-        $auth_user_name      = $_POST['auth_user_name'];
-        $post_content        = $_POST['post_content'];
+        $name      = $_POST['name'];
+        $content   = $_POST['content'];
 
         //Auth User Photo uploed
-        $auth_user_photo = move([
-            "tmp_name" => $_FILES['auth_user_photo']['tmp_name'],
-            "name"      => $_FILES['auth_user_photo']['name'],
-        ], "../media/auth_user_photo/");
+        $photo = null;
+        if (!empty($_FILES['photo']['name'])) {
+            $photo = move([
+                "tmp_name"  => $_FILES['photo']['tmp_name'],
+                "name"      => $_FILES['photo']['name'],
+            ], "../media/photo/");
+        }
+
         //Post Photo uploed
-        // $post_photos = [];
-        // if (!empty($_FILES['post_photos']['name'][0])) {
+        $post_photo = [];
+        if (!empty($_FILES['post_photo']['name'][0])) {
 
-        //     for ($i = 0; $i < count($_FILES['post_photos']['name']); $i++) {
-        //         $post_photo_item = move([
-        //             "tmp_name"  => $_FILES['post_photos']['tmp_name'][$i],
-        //             "name"      => $_FILES['post_photos']['name'][$i],
-        //         ], "media/posts/");
+            for ($i = 0; $i < count($_FILES['post_photo']['name']); $i++) {
+                $post_photo_item = move([
+                    "tmp_name"  => $_FILES['post_photo']['tmp_name'][$i],
+                    "name"      => $_FILES['post_photo']['name'][$i],
+                ], "../media/posts/");
 
-        //         array_push($post_photos, $post_photo_item);
-        //     }
-        // }
+                array_push($post_photo, $post_photo_item);
+            }
+        }
 
-        // //video uploed
-        // $post_videos = null;
-        // if ($_FILES['post_video']['name']) {
+        //video uploed
+        $post_video = null;
+        if ($_FILES['post_video']['name']) {
 
-        //     $post_videos = move([
-        //         "tmp_name"  => $_FILES['post_videos']['tmp_name'],
-        //         "name"      => $_FILES['post_videos']['name'],
-        //     ], "media/videos/");
-        // }
-
-
-
+            $post_video = move([
+                "tmp_name"  => $_FILES['post_video']['tmp_name'],
+                "name"      => $_FILES['post_video']['name'],
+            ], "../media/video/");
+        }
         store('post', [
-            'auth_user_name'       => $auth_user_name,
-            'auth_user_photo'      => $auth_user_photo ? $auth_user_photo : null,
-            'post_content'         => $post_content,
+            'name'         => $name,
+            'photo'        => $photo,
+            'content'      => $content,
+            'post_photo'   => json_encode($post_photo),
+            'post_video'   => $post_video,
 
         ]);
-
-        break;
-
-    case "received";
-        $document_received  = $_POST['document_received'];
-        $invoice_value      = $_POST['invoice_value'];
-        $invoice_no         = $_POST['invoice_no'];
-        $invoice_date       = $_POST['invoice_date'];
-        $net_weight         = $_POST['net_weight'];
-
-        update('enty', 24, [
-            " document_received"    => $document_received,
-            " invoice_value"        => $invoice_value,
-            " invoice_no"           => $invoice_no,
-            " invoice_date"         => $invoice_date,
-            " net_weight"           => $net_weight,
-        ]);
-        break;
-
-    case "register";
-        $be_no      = $_POST['be_no'];
-        $be_date    = $_POST['be_date'];
-        $be_lane    = $_POST['be_lane'];
-
-        update('enty', 24, [
-            " be_no"        => $be_no,
-            " be_date"      => $be_date,
-            " be_lane"      => $be_lane,
-        ]);
-        break;
-
-    case "assessment";
-        $assessment_date    = $_POST['assessment_date'];
-        $r_no               = $_POST['r_no'];
-        $x_no               = $_POST['x_no'];
-        $scann_document     = $_POST['scann_document'];
-
-        update('enty', 24, [
-            " assessment_date"     => $assessment_date,
-            " r_no"                => $r_no,
-            " x_no"                => $x_no,
-            " scann_document"      => $scann_document,
-        ]);
-        break;
-
-    case "delivery";
-        echo "hi";
         break;
 };
